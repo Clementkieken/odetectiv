@@ -262,11 +262,21 @@ p{
     color: rgb(255, 60, 0);
 }
 
+.final{
+    text-align: center;
+    margin: auto;
+    padding: 2em 0em 0em;
+    display:flex;
+    width: 500px;
+    transition:transform 0.25s ease;
+}
+
+.final:hover{
+    -webkit-transform:scale(1.5);
+    transform:scale(1.5);
+}
 /* CONTACT */
 
-.contact__h1{
-    
-}
 
 .contact__li{
     text-align: center;
