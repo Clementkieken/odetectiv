@@ -1,0 +1,239 @@
+body {
+    margin: 0;
+    margin-top: 114px;
+    margin-bottom: 70px;
+    padding: 30px;
+    color: rgb(0, 0, 0);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    background-color: #363a42;
+}
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    background-color: #293B5F;
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    right: 0
+}
+
+.header__logo {
+    color: #ff5e00;
+    font-weight: bold;
+    font-size: 2em;
+    background-color: #DBE6FD;
+    padding: 10px;
+    box-shadow: 0 2px 2px rgb(0 0 0 / 10%);
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    height: 30px;
+}
+
+.header__nav ul {
+    display: flex;
+}
+
+.header__nav ul li {
+    margin-right: 20px;
+    list-style: none;
+}
+
+.button {
+    text-decoration: none;
+    color: #ff7818;
+}
+
+.footer {
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(76 76 76);
+    color: white;
+    position: fixed; 
+    bottom: 0; 
+    left: 0; 
+    right: 0
+}
+
+.footer a {
+    text-decoration: none;
+    color: white;
+}
+
+/* HOME */
+
+
+.home__h1{
+    font-size : 3em;
+    margin : 2em;
+    text-align: center;
+    color: #e0e266;
+}
+
+.home__h2{
+    font-size : 2em;
+    font-style: italic;
+    text-align: center;
+    color :rgb(214, 214, 214);
+}
+
+.home__img{
+    text-align: center;
+    margin: auto;
+    display:flex;
+    padding: 5em;
+}
+
+/* AFFAIRES */
+
+.case__h1{
+    font-size: 3em;
+    text-align: center;
+    color: whitesmoke;
+}
+
+.cards {
+    text-align: center;
+
+}
+
+.case__li{
+    padding : 2em;
+    margin : 1.5em;
+}
+
+a {
+    color : white;
+    text-decoration: none;
+}
+
+a:visited {
+    color : rgb(204, 135, 45)
+}
+
+a:hover {
+    color : rgb(199, 95, 95)
+}
+
+
+/* H1 TOUTES LES AFFAIRES */
+
+.affaires__h1{
+    font-size: 2em;
+    color: orange;
+    text-align: center;
+    margin: 1.5em;
+}
+
+/* NO TIME */
+
+.underline{
+    text-decoration: underline;
+}
+
+.notime__p{
+    text-align: center;
+    padding: 1.5em 0em;
+}
+
+.busy_gif{
+    display: flex;
+    margin: auto;
+    text-align: center;
+}
+
+/* PHP */
+
+.php__h1{
+    font-size: 2em;
+    color: orange;
+    text-align: center;
+    margin: 1.5em 0em 0.3em;
+}
+
+.php__h2{
+    font-size: 1.5em;
+    padding : 1.5em 0em ;
+    text-align: center;
+    color: rgb(209, 82, 82);
+}
+
+.php__h3{
+    font-size: 0.7em;
+    font-style: italic;
+    text-align: center;
+}
+
+.php__img{
+    text-align: center;
+    margin: auto;
+    display:flex;
+}
+
+/* PHOTOSHOPPEUR FOU */
+
+.container{
+    display: flex;
+    justify-content: center;
+}
+
+.photo__body{
+    width: 50em;
+    background-color: rgb(224, 224, 224);
+    padding: 2em;
+
+}
+
+.commisariat{
+    text-align: center;
+    margin: auto;
+    padding: 2em 0em 0em;
+    display:flex;
+    width: 400px;
+}
+
+.figcaption{
+    font-size: 0.8em;
+    text-align: center;
+    padding: 1.5em;
+    font-style: italic;
+}
+
+.entete{
+    font-weight: bold;
+    font-size: 1.7em;
+}
+
+p{
+    line-height: 150%;
+    padding: 0em 0em 2em;
+}
+
+.sql{
+    background-color: rgb(235, 104, 104);
+    font-weight: bold;
+    font-style: italic;
+}
+
+.italic{
+    font-style: italic;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.beth{
+    font-style: italic;
+    color: purple;
+}
+
+.sadi{
+    color: rgb(59, 59, 160);
+}

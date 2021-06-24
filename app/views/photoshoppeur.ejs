@@ -1,181 +1,272 @@
 <%- include('partials/header') %>
 
-<h1>Le Photoshoppeur Fou.</h1>
+<h1 class="affaires__h1">Le Photoshoppeur Fou.</h1>
 
-<p>
-16h. 
-L'après midi est déjà bien avancé et je n'ai encore rien fait de la journée. Pfff.. Ce café froid a le goût d'un dimanche soir de novembre... Je prends mes clefs, mon imper imperméable et je saute dans ma 206 toute dézinguée. Direction le poste de police.
+<div class="container">
+    <div class="photo__body">
 
-<img src="../../Ressources/158ae45396.jpg">
+        <p>
+            <span class="entete">16h.</span>
+            L'après midi est déjà bien avancé et je n'ai encore rien fait de la journée. Pfff.. Ce café froid a le goût
+            d'un dimanche soir de novembre. Je prends mes clefs, mon imper imperméable et je saute dans ma 206 toute
+            dézinguée. Direction le poste de police.
+        </p>
 
- Le gars à l'accueil a sa tête des mauvais jours. Il me tend un rapport mais, évidement, tout est dans le désordre. Mon instinct de super dev m'a dit de les trier dans l'ordre de la date, histoire d'y voir plus clair.
-`SELECT*FROM rapport_police ORDER BY date desc;`
-Déjà 16h05 ! J'ai bien mérité une grande pause parce que franchement, j'ai déjà pas mal bossé.
-</p>
-(...)
+        <img class="commisariat" src="/ressources/158ae45396.jpg">
+        <p class="figcaption">Le comissariat central de Melun</p>
 
-<p>
-17h. 
-Bon, l'affaire n'a pas avancé d'un pouce pendant mon absence.
-Je lis les rapports.
-Hmmm...
-Une certaine Beth Rave et une personne non identifiée habitant au dernier numéro de la rue Sadi Carnot semble avoir vu quelque chose. Pour moi ils sont coupables, c'est sûr !
-J'affine ma recherche, apparament il y a eu d'autres délits ce jour là.
-`SELECT*FROM rapport_police WHERE date='11122019';`
-
-Tiens, je vois un autre rapport. L'adjoint au maire aurait fait une croix sur la bulle. Qu'importe ce que ça veuille dire, je n'ai jamais pu encadrer ce salopard d'adjoint.
-</p>
-
-<p>
-Je dois maintenant enquêter à la fois sur Beth, l'adjoint et ce mystérieux habitant de la rue Sadi Carnot. Peut-être est-ce un coup des trois ? Hmm.. possible.
-
-Je recherche leur témoignage : `SELECT * FROM temoignage;`. C'est d'un foutoir sans nom, la police n'a pas jugé utile de mettre le nom des témoignants, juste des ID. Il faut que je retrouve l'ID de Beth, pour commencer.
-Je remarque qu'une table "personne" existe. Je m'y engage directement sans ménagement : `SELECT*FROM personne;`. La liste est gigantesque, je décide alors de faire un p'tit control F et d'affiner ma recherche en tapant "Beth". 8 résultats. Bingo ! Son ID est 416, Beth Rave, habitant au 643 rue de Groussay. Age 42 ans, 1m99 (wtf), appartenant à la promo 17 et dont l'id du projet est 27, quoique ça veuille dire à ce stade de mes recherches.
-
-Je profite d'être là pour trouver l'habitant de la rue Sadi Carnot et ce foutu adjoint au maire.
-`SELECT*FROM personne WHERE rue='rue Sadi Carnot';`
-13 résultats. Heureusement qu'il n'y en a pas plus, je ne sais pas comment mettre deux conditions dans ma requête. 
-Je sais qu'il habite au dernier numéro via le rapport de police.
-Tiens tiens, un certain "Alex Trémité", comique de métier, 52 ans, habitant au 995 dont l'ID est 549, mesurant deux nains de 76.5cm empilés, ayant pour promo_ID 9 et projet_ID 36. Je note tout en vrac, ça servira peut-être plus tard. Je cherche des infos sur l'adjoint du maire mais en vain. Si seulement il avait rendu son nom publique...
-</p>
-<p>
-Mes recherches sont cependant satisfaisantes. Je peux maintenant retourner dans les témoignages et chercher les ID 416 et 549.
-`SELECT*FROM temoignage WHERE id=416`.
-Tiens, la "p'tite" Beth n'a rien vu. La belle affaire. Je note cependant qu'elle a remarqué que le coupable faisait parti de la promo couleur Pourpre. Nouvel indice.
-`SELECT * FROM temoignage WHERE id='549';`
-Notre comique a vu le coupable mais il ne connait pas son nom ! Bordel, s'agirai-t-il de l'adjoint ? Je l'espère.. Je traque cet enfoiré depuis l'affaire de la Compote de Pomme. Je reprend une gorgée de mon café glacé quand mon oeil aguisé tombe sur la suite du rapport. "Je sais qu'il a travaillé sur le projet O'asis !". Ca pour de l'info, c'est de l'info...
-
-Je referme nonchalament le dossier. Je n'ai pas trouvé de résultats bétons mais encore des indices. Encore... La soirée va être longue. Je décide d'appeler ma chère et tendre pour lui dire que je ne rentrerai pas ce soir. Elle va encore me maudire mais la justice n'attends pas. On est jeudi en plus, elle m'a sûrement fait son fameux canard aux poires confites... "Tant pis, je trouverai le coupable coûte que coûte et dînerai froid", pensais-je en avalant la dernière goutte de ce qui fût un café chaud et réconfortant.
-</p>
-<p>
-Commençons par regarder dans la promo pourpre. Avec un peu de chance, il n'y aurait qu'une seule personne. `SELECT*FROM promo;`. Il y a pas mal de promo mais je remarque que je peux les lister par couleur. `SELECT*FROM promo WHERE couleur='pourpre;`. Je met le doigt dessus : promo Tardis, id 20.
-Il faut que je plonge encore plus profondémment dans les abysses de cette affaire nauséabonde...
-Je décide de checker le deuxième indice, celui d'Alex : `SELECT * FROM projet WHERE nom_projet='O\'asis';`. Nom du projet : O'Asis. Parfait. Id du projet : 15.
-
-Je sens que je m'approche du but. Mais il faut que je récapitule mes infos.
-
-Selon les indices, voici ce que j'ai appris du coupable :
-Nom : inconnu
-rue : inconnu
-numero_rue : inconnu
-age : inconnu
-taille : inconnu
-Projet : O'asis
-projet_id : 15
-Promo : Tardis
-Couleur promo : Pourpre
-promo Id : 20.
-
-Grätterfürdöm ! comme disait mon arrière grand-père faussement allemand. Les infos sont minces mais j'avance.
-</p>
-<p>
-J'essaye de voir si plusieurs suspect recoupent ces quelques informations : `SELECT * FROM personne WHERE projet_id='15' AND promo_id='20';`
-
-Incroyable !!
-Une seule personne répond à ces critères. Un certain Cyril Hique, id 145, habitant au 454 rue Goya, âgé de 61 ans, mesurant lui aussi deux nains empilés. Hmmm.. Deux nains empilés... Ca me dit quelque chose.. Bordel, mon vieux, fait travailler ta mémoire ! 
-Je remonte de 34 lignes et bingo ! Le comique, Alex Trémité ! Lui aussi est tout petit ! Mais le reste des infos ne collent pas, c'est une dead end. Dommage, ça aurait été trop beau, mais la vie est une pute.
-Ca ne fait rien, j'ai trouvé le coupable de ces effroyables photo-montage. Foutu Cyril Hique, sûrement un russe.
-
-Je referme les dossiers, l'esprit momentanément appaisé. Je sors ma vieille bouteille de scotch qui me sert à célébrer mes victoires. Elle est pleine. Je me sers une bonne rasade quand soudain, ça me frappe comme un coup de poing dans les roubignoles.
-Cyril Hique.
-J'ai déjà entendu ce nom en cours.
-Mais oui ! Il avait déjà fait l'objet d'une enquête en 1997 sur la revente de petits pains non homologués par la préfecture, ma deuxième affaire.
-</p>
-<p>
-Il faut que j'aille lui parler. Mon instinct me dit quelque chose ne tourne pas tout à fait rond. Je reprend mon imper et fonce dans ma caisse branlante. Direction : 454 rue Goya.
-`SELECT * FROM temoignage WHERE id=145;`
-Je sonne à la porte, le coeur haletant, la main sur mon pistolet à bille.
-Cyril ouvre. Son visage se décompose à ma vue.
-"Je t'ai retrouvé Cyril.. Tu n'es pas seulement un lâche, mais tu es aussi un traître, comme ta petite taille le laissait deviner !"
-"C'est dans OSS 177 ça, tu vas avoir des emmerdes de copyright".
-Le bougre, il a raison...
-"Ecoute, c'est bien moi qui ai fait les caricatures mais à la demande de quelqu'un de l'équipe. C'est un helper qui a entre 40 et 45 ans et fait entre 1m80 et 1m90." enchaîne-t-il.
-" Un helper ? Qui est-il ..!"
-
-A peine eu-je le temps de terminer ma phrase qu'une voiture tourne au coin de la rue, le moteur vombrissant comme un troupeau de gnous. Je sens qu'une catastrophe va arriver sous peu. Je remercie mentalement mon spider-sens et me jette sans réfléchir dans le fourré à côté, juste au moment où une rafale de peau de banane sont envoyés sur le malheureux. Je l'entends glisser et se fracturer la nuque sur les marches. Craque.
-Je reste couché là tandis que la voiture s'éloigne au loin. Je n'ai même pas eu le temps de relever sa plaque d'immatriculation.
-Putain, ils ne l'ont pas ratés.. Il faut que je retourne au poste de police.
-</p>
-<p>
-17h27.
-Le commisariat est sinistre, tout comme la scène où j'ai assisté.
-Je réouvre le dossier. Une personne entre 1m80 et 1m90.. Hmm..Ca fait bien au moins deux nains et demi cette histoire.
-J'affine ma recherche :
-`SELECT * FROM personne WHERE taille='180 AND taille='190';`
-Bordel de margoulins, aucun résultat ! 
-
-Je me suis sûrement trompé dans ma recherche mais je note cependant que les différentes personnes de la liste ont un chiffre différent pour leur rôle. 1 et 2. Peut-être que 1 = étudiant et 2 = helper. Le russe parlait d'un helper. Il faut que j'en ai le coeur net.
-
-Pris d'une frénésie, je fonce chercher dans le tableau des rôles
-`SELECT * FROM role;`
-
-Pas loin. Helper a bien une ID et c'est le 3.
-Listons le nombre d'helper. Peut-être que comme Cyril, RIP in peace, il n'y en a qu'un.
-`SELECT * FROM personne WHERE role_id='3';`
-
-J'ai eu de la chance une fois. Pas deux. 10 helpers sont identifiés. Il faut que j'affine ma recherche pour avoir une meilleur vision de mon 2nd indice, sa taille. Vu que je ne sais pas faire de recherche avec uen condition "ENTRE tel taille et tel taille", je profite de leur petit nombre pour les listers par taille directement.
-`SELECT * FROM personne WHERE role_id='3' ORDER BY taille desc;`
-
-Deux personnes sortent de ma recherche, après avoir galéré à l'écrire :
-- 561 Gédéon Groidenmabaignoire, 813 place de la Madeleine, âgé de 44 ans, 1m86 (2.41 nains), promo_id 3, projet_id 21.
-- 369 Amandine Ozaur, 65 place Charles de Gaulle, âgée de 56 ans, 1m86, promo_id 15, projet_id 23.
-
-Rien ne concorde avec Cyril cependant.
-</p>
-<p>
-Je vais aller les voir, sait-on jamais.
-Je commence par Gédéon. Au feu rouge, je parcours vite fait son dossier. Il est mention que c'est un zadiste ayant cachés quelques réfugiés Magyariens.
-`SELECT * FROM temoignage WHERE id='561';`
-Je sonne. Il m'ouvre.
-"Bonsoir monsieur, je souhaiterai vous poser quelques ques..."
-Je m'interrompt de moi-même. Son regard est fuyant et zieute les alentours. Il semble troublé et inquiet. Le grand Gédéon fini par me regarder me murmure :
-"Jacques Chirac interdit les consignes à un manipulateur...". Et claque la porte tout aussi sec.
-Je reste gros Jean comme devant sur le pas de sa porte. Mais quel est le fuck ?!
-
-Troublé à mon tour, je me décide de me rendre chez la deuxième personne.
-`SELECT * FROM temoignage WHERE id='369';`
-Je sonne. Elle m'ouvre. 
-"Bonsoir madame, je souhaiterai vous poser quelques ques..."
-Je m'interrompt en croisant son regard. Elle a l'air complètement affolée.
-Elle s'exclame : "Le mercredi 9 août 2079, le maître-saucier oubliera de masquer un garçon avec la muse de fabrication scandinave !"
-Un ange passe.
-"Mais c'est quoi ce bordel !"
-Elle me regarde une dernière fois de ses yeux vitreux et ferme doucement la porte, me laissant pantois, une nouvelle fois.
+        <p>
+            Le gars à l'accueil a sa tête des mauvais jours. Il me tend un rapport mais, évidement, tout est dans le
+            désordre. Mon instinct de super dev m'a dit de les trier dans l'ordre de la date, histoire d'y voir plus
+            clair.<br>
+            <span class="sql">SELECT*FROM rapport_police ORDER BY date desc;</span><br>
+            Déjà 16h05 ! J'ai bien mérité une grande pause parce que franchement, j'ai déjà pas mal bossé.
+        </p>
 
 
-Je retourne à ma bagnole cabossée en ruminant... Cette école les rends fous !
-Le dossier est sur le siège du mort, entrouvert. Quelque chose m'interpelle. Oh non ! Oh non la boulette ! Je relis la description de feu Cyrile. "âgé entre 40 et 45 ans".
-Comment ai-je pu oublié cette info ! Putain Ray, tu déconnes grave.
-N'écoutant plus que les battements de mon coeur qui me faisait culpabiliser à chaque coup dans ma poitrine, j'écrase de tout mon pied l'accélérateur. On verra les P.V. plus tard.
-Grillant les feux rouges, la lumière blème des réverbères se reflètent par accoup sur mon visage livide. L'auto-radio est éteint, le klaxon des voitures que je dépasse me suffit.
-</p>
-<p>
-18h15.
-J'arrive devant la porte de cet enculé de petit voyou. Plus le temps d'y aller dans la finesse, je sors mon Magnum .44, Benny, fidèlement lové contre ma poitrine. Mon meilleur pote depuis l'affaire du Mystère du Mug Jaune. Je ne vais pas sonner à la porte cette fois-ci, il faut se la jouer discret. En contournant la maison j'apperçois une trappe menant à la cave. Merde, elle est fermée !
-J'installe le silencieux sur Benny et tente de faire sauter le cadenas. Les billes ricochent sans effet. Foutu Benny. Je me baisse pour ramasser les petites billes jaunes (au prix où ça coûte !) et je remarque que le cadena n'était en fait pas fermé. Je lève les yeux au ciel et fait un clin d'oeil arrogant à mon ange protecteur. 
-Sans hésiter, je m'engouffre dans les ténèbres. La cave est moite, humide, je manque de me cogner à chaque pierres. Heureusement j'ai mon briquet BIC dans la poche. Ce que révèle la flamme m'effroi. Des dizaines.. Non, des centaines photos retouchées sont accrochés sur les murs. Flore à la direction d'Apple. Jimmy sur celle de Squeezie. Tony à une merguez party. Mon Dieu, quel horreur... Mon coeur se soulève devant tant d'attrocité.
-C'est décidé, je dois mettre un terme à tout ça.
-Lentement mais sûrement, je photographie chacune des pièces à conviction. J'ai tout ce qu'il me faut pour coffrer ce salopard. 
+        <p>
+            <span class="entete">17h.</span>
+            Bon, l'affaire n'a pas avancé d'un pouce pendant mon absence.<br>
+            Je lis les rapports.<br>
+            Hmmm...<br>
+            Une certaine <span class="beth">Beth Rave</span> et une personne non identifiée habitant au dernier numéro
+            de la rue <span class="sadi">Sadi Carnot</span> (<span class="italic">un grand homme politique, comme dirait
+                mon ami Florian</span>) semble avoir vu quelque chose. Pour moi ils sont coupables, c'est sûr ! Mon
+            instinct de flic ne me ment jamais.<br>
+            J'affine ma recherche, apparament il y a eu d'autres délits ce jour là.<br>
+            <span class="sql">SELECT*FROM rapport_police WHERE date='11122019';</span><br>
 
-Je repars aussi discrètement que je suis venu. Personne ne saura que je suis venu. Mais le monde connaîtra sous peu l'identité du Photoshoppeur Fou.
-</p>
-<p>
-18h45.
-Arrivé au poste de police, je me précipite sur l'ordinateur mis à disposition pour les détectives professionnels tel que moi. Ca rame.
-Une demi-heure plus tard, Internet Explorer s'ouvre enfin. Vite, il ne faut pas traîner !
-J'entre en vitesse l'adresse pour enfin conclure cette affaire : http://cluedo.oclock.lan/
-</p>
-<p>
-19h20.
-La page s'ouvre. Coupable démasqué ? me demande la machine. 
-Bien évidemment.
-J'entre le nom du coupable sans une certaine délectation.
-Gédéon Groidenmabaignoire.
+            Tiens, je vois un autre rapport. L'adjoint au maire aurait fait une croix sur la bulle. Qu'importe ce que ça
+            veuille dire, je n'ai jamais pu encadrer ce salopard d'adjoint.
+        </p>
 
-La victoire que je ressens à cet instant est indescriptible. Encore une affaire réussie par le formidable Ray Ponce !
-</p>
+        <p>
+            Je dois maintenant enquêter à la fois sur <span class="beth">Beth</span>, l'adjoint et <span class="sadi">ce
+                mystérieux habitant de la rue Sadi Carnot</span>.
+            Peut-être est-ce un coup des trois ? Hmm.. possible.
+
+        </p>
+
+        <p>
+            Je recherche leur témoignage : <span class="sql">SELECT * FROM temoignage;</span>. <br>
+            C'est d'un foutoir sans nom, la police n'a pas jugé utile de mettre le nom des témoignants, juste des <span
+                class="bold">ID</span>. Il faut que je retrouve l'<span class="bold">ID</span> de <span class="beth">Beth</span>, pour commencer.
+            Je remarque qu'une table "<span class="italic">personne</span>" existe. Je m'y engage directement sans ménagement : <br><span class="sql">SELECT*FROM
+            personne;</span>.
+        </p>
+
+        <p>
+            La liste est gigantesque, je décide alors de faire un p'tit control F et d'affiner ma recherche
+            en tapant "<span class="beth">Beth</span>". 8 résultats. <span class="bold">Bingo !</span> Son <span class="bold">ID</span> est <span class="bold">416</span>, <span class="beth"></span>Beth Rave, habitant au 643 rue de Groussay. Age 42
+            ans, 1m99 (wtf), appartenant à la promo 17 et dont l'id du projet est 27, quoique ça veuille dire à ce stade
+            de mes recherches.
+
+            Je profite d'être là pour trouver l'habitant de la rue Sadi Carnot et ce foutu adjoint au maire.
+            `SELECT*FROM personne WHERE rue='rue Sadi Carnot';`
+            13 résultats. Heureusement qu'il n'y en a pas plus, je ne sais pas comment mettre deux conditions dans ma
+            requête.
+            Je sais qu'il habite au dernier numéro via le rapport de police.
+            Tiens tiens, un certain "Alex Trémité", comique de métier, 52 ans, habitant au 995 dont l'ID est 549,
+            mesurant deux nains de 76.5cm empilés, ayant pour promo_ID 9 et projet_ID 36. Je note tout en vrac, ça
+            servira peut-être plus tard. Je cherche des infos sur l'adjoint du maire mais en vain. Si seulement il avait
+            rendu son nom publique...
+        </p>
+        <p>
+            Mes recherches sont cependant satisfaisantes. Je peux maintenant retourner dans les témoignages et chercher
+            les ID 416 et 549.
+            `SELECT*FROM temoignage WHERE id=416`.
+            Tiens, la "p'tite" Beth n'a rien vu. La belle affaire. Je note cependant qu'elle a remarqué que le coupable
+            faisait parti de la promo couleur Pourpre. Nouvel indice.
+            `SELECT * FROM temoignage WHERE id='549';`
+            Notre comique a vu le coupable mais il ne connait pas son nom ! Bordel, s'agirai-t-il de l'adjoint ? Je
+            l'espère.. Je traque cet enfoiré depuis l'affaire de la Compote de Pomme. Je reprend une gorgée de mon café
+            glacé quand mon oeil aguisé tombe sur la suite du rapport. "Je sais qu'il a travaillé sur le projet O'asis
+            !". Ca pour de l'info, c'est de l'info...
+
+            Je referme nonchalament le dossier. Je n'ai pas trouvé de résultats bétons mais encore des indices.
+            Encore... La soirée va être longue. Je décide d'appeler ma chère et tendre pour lui dire que je ne rentrerai
+            pas ce soir. Elle va encore me maudire mais la justice n'attends pas. On est jeudi en plus, elle m'a
+            sûrement fait son fameux canard aux poires confites... "Tant pis, je trouverai le coupable coûte que coûte
+            et dînerai froid", pensais-je en avalant la dernière goutte de ce qui fût un café chaud et réconfortant.
+        </p>
+        <p>
+            Commençons par regarder dans la promo pourpre. Avec un peu de chance, il n'y aurait qu'une seule personne.
+            `SELECT*FROM promo;`. Il y a pas mal de promo mais je remarque que je peux les lister par couleur.
+            `SELECT*FROM promo WHERE couleur='pourpre;`. Je met le doigt dessus : promo Tardis, id 20.
+            Il faut que je plonge encore plus profondémment dans les abysses de cette affaire nauséabonde...
+            Je décide de checker le deuxième indice, celui d'Alex : `SELECT * FROM projet WHERE nom_projet='O\'asis';`.
+            Nom du projet : O'Asis. Parfait. Id du projet : 15.
+
+            Je sens que je m'approche du but. Mais il faut que je récapitule mes infos.
+
+            Selon les indices, voici ce que j'ai appris du coupable :
+            Nom : inconnu
+            rue : inconnu
+            numero_rue : inconnu
+            age : inconnu
+            taille : inconnu
+            Projet : O'asis
+            projet_id : 15
+            Promo : Tardis
+            Couleur promo : Pourpre
+            promo Id : 20.
+
+            Grätterfürdöm ! comme disait mon arrière grand-père faussement allemand. Les infos sont minces mais
+            j'avance.
+        </p>
+        <p>
+            J'essaye de voir si plusieurs suspect recoupent ces quelques informations : `SELECT * FROM personne WHERE
+            projet_id='15' AND promo_id='20';`
+
+            Incroyable !!
+            Une seule personne répond à ces critères. Un certain Cyril Hique, id 145, habitant au 454 rue Goya, âgé de
+            61 ans, mesurant lui aussi deux nains empilés. Hmmm.. Deux nains empilés... Ca me dit quelque chose..
+            Bordel, mon vieux, fait travailler ta mémoire !
+            Je remonte de 34 lignes et bingo ! Le comique, Alex Trémité ! Lui aussi est tout petit ! Mais le reste des
+            infos ne collent pas, c'est une dead end. Dommage, ça aurait été trop beau, mais la vie est une pute.
+            Ca ne fait rien, j'ai trouvé le coupable de ces effroyables photo-montage. Foutu Cyril Hique, sûrement un
+            russe.
+
+            Je referme les dossiers, l'esprit momentanément appaisé. Je sors ma vieille bouteille de scotch qui me sert
+            à célébrer mes victoires. Elle est pleine. Je me sers une bonne rasade quand soudain, ça me frappe comme un
+            coup de poing dans les roubignoles.
+            Cyril Hique.
+            J'ai déjà entendu ce nom en cours.
+            Mais oui ! Il avait déjà fait l'objet d'une enquête en 1997 sur la revente de petits pains non homologués
+            par la préfecture, ma deuxième affaire.
+        </p>
+        <p>
+            Il faut que j'aille lui parler. Mon instinct me dit quelque chose ne tourne pas tout à fait rond. Je reprend
+            mon imper et fonce dans ma caisse branlante. Direction : 454 rue Goya.
+            `SELECT * FROM temoignage WHERE id=145;`
+            Je sonne à la porte, le coeur haletant, la main sur mon pistolet à bille.
+            Cyril ouvre. Son visage se décompose à ma vue.
+            "Je t'ai retrouvé Cyril.. Tu n'es pas seulement un lâche, mais tu es aussi un traître, comme ta petite
+            taille le laissait deviner !"
+            "C'est dans OSS 177 ça, tu vas avoir des emmerdes de copyright".
+            Le bougre, il a raison...
+            "Ecoute, c'est bien moi qui ai fait les caricatures mais à la demande de quelqu'un de l'équipe. C'est un
+            helper qui a entre 40 et 45 ans et fait entre 1m80 et 1m90." enchaîne-t-il.
+            " Un helper ? Qui est-il ..!"
+
+            A peine eu-je le temps de terminer ma phrase qu'une voiture tourne au coin de la rue, le moteur vombrissant
+            comme un troupeau de gnous. Je sens qu'une catastrophe va arriver sous peu. Je remercie mentalement mon
+            spider-sens et me jette sans réfléchir dans le fourré à côté, juste au moment où une rafale de peau de
+            banane sont envoyés sur le malheureux. Je l'entends glisser et se fracturer la nuque sur les marches.
+            Craque.
+            Je reste couché là tandis que la voiture s'éloigne au loin. Je n'ai même pas eu le temps de relever sa
+            plaque d'immatriculation.
+            Putain, ils ne l'ont pas ratés.. Il faut que je retourne au poste de police.
+        </p>
+        <p>
+            17h27.
+            Le commisariat est sinistre, tout comme la scène où j'ai assisté.
+            Je réouvre le dossier. Une personne entre 1m80 et 1m90.. Hmm..Ca fait bien au moins deux nains et demi cette
+            histoire.
+            J'affine ma recherche :
+            `SELECT * FROM personne WHERE taille='180 AND taille='190';`
+            Bordel de margoulins, aucun résultat !
+
+            Je me suis sûrement trompé dans ma recherche mais je note cependant que les différentes personnes de la
+            liste ont un chiffre différent pour leur rôle. 1 et 2. Peut-être que 1 = étudiant et 2 = helper. Le russe
+            parlait d'un helper. Il faut que j'en ai le coeur net.
+
+            Pris d'une frénésie, je fonce chercher dans le tableau des rôles
+            `SELECT * FROM role;`
+
+            Pas loin. Helper a bien une ID et c'est le 3.
+            Listons le nombre d'helper. Peut-être que comme Cyril, RIP in peace, il n'y en a qu'un.
+            `SELECT * FROM personne WHERE role_id='3';`
+
+            J'ai eu de la chance une fois. Pas deux. 10 helpers sont identifiés. Il faut que j'affine ma recherche pour
+            avoir une meilleur vision de mon 2nd indice, sa taille. Vu que je ne sais pas faire de recherche avec uen
+            condition "ENTRE tel taille et tel taille", je profite de leur petit nombre pour les listers par taille
+            directement.
+            `SELECT * FROM personne WHERE role_id='3' ORDER BY taille desc;`
+
+            Deux personnes sortent de ma recherche, après avoir galéré à l'écrire :
+            - 561 Gédéon Groidenmabaignoire, 813 place de la Madeleine, âgé de 44 ans, 1m86 (2.41 nains), promo_id 3,
+            projet_id 21.
+            - 369 Amandine Ozaur, 65 place Charles de Gaulle, âgée de 56 ans, 1m86, promo_id 15, projet_id 23.
+
+            Rien ne concorde avec Cyril cependant.
+        </p>
+        <p>
+            Je vais aller les voir, sait-on jamais.
+            Je commence par Gédéon. Au feu rouge, je parcours vite fait son dossier. Il est mention que c'est un zadiste
+            ayant cachés quelques réfugiés Magyariens.
+            `SELECT * FROM temoignage WHERE id='561';`
+            Je sonne. Il m'ouvre.
+            "Bonsoir monsieur, je souhaiterai vous poser quelques ques..."
+            Je m'interrompt de moi-même. Son regard est fuyant et zieute les alentours. Il semble troublé et inquiet. Le
+            grand Gédéon fini par me regarder me murmure :
+            "Jacques Chirac interdit les consignes à un manipulateur...". Et claque la porte tout aussi sec.
+            Je reste gros Jean comme devant sur le pas de sa porte. Mais quel est le fuck ?!
+
+            Troublé à mon tour, je me décide de me rendre chez la deuxième personne.
+            `SELECT * FROM temoignage WHERE id='369';`
+            Je sonne. Elle m'ouvre.
+            "Bonsoir madame, je souhaiterai vous poser quelques ques..."
+            Je m'interrompt en croisant son regard. Elle a l'air complètement affolée.
+            Elle s'exclame : "Le mercredi 9 août 2079, le maître-saucier oubliera de masquer un garçon avec la muse de
+            fabrication scandinave !"
+            Un ange passe.
+            "Mais c'est quoi ce bordel !"
+            Elle me regarde une dernière fois de ses yeux vitreux et ferme doucement la porte, me laissant pantois, une
+            nouvelle fois.
 
 
-SELECT*FROM personne WHERE rue='rue Sadi Carnot' ORDER BY numero_rue desc limit 1;
+            Je retourne à ma bagnole cabossée en ruminant... Cette école les rends fous !
+            Le dossier est sur le siège du mort, entrouvert. Quelque chose m'interpelle. Oh non ! Oh non la boulette !
+            Je relis la description de feu Cyrile. "âgé entre 40 et 45 ans".
+            Comment ai-je pu oublié cette info ! Putain Ray, tu déconnes grave.
+            N'écoutant plus que les battements de mon coeur qui me faisait culpabiliser à chaque coup dans ma poitrine,
+            j'écrase de tout mon pied l'accélérateur. On verra les P.V. plus tard.
+            Grillant les feux rouges, la lumière blème des réverbères se reflètent par accoup sur mon visage livide.
+            L'auto-radio est éteint, le klaxon des voitures que je dépasse me suffit.
+        </p>
+        <p>
+            18h15.
+            J'arrive devant la porte de cet enculé de petit voyou. Plus le temps d'y aller dans la finesse, je sors mon
+            Magnum .44, Benny, fidèlement lové contre ma poitrine. Mon meilleur pote depuis l'affaire du Mystère du Mug
+            Jaune. Je ne vais pas sonner à la porte cette fois-ci, il faut se la jouer discret. En contournant la maison
+            j'apperçois une trappe menant à la cave. Merde, elle est fermée !
+            J'installe le silencieux sur Benny et tente de faire sauter le cadenas. Les billes ricochent sans effet.
+            Foutu Benny. Je me baisse pour ramasser les petites billes jaunes (au prix où ça coûte !) et je remarque que
+            le cadena n'était en fait pas fermé. Je lève les yeux au ciel et fait un clin d'oeil arrogant à mon ange
+            protecteur.
+            Sans hésiter, je m'engouffre dans les ténèbres. La cave est moite, humide, je manque de me cogner à chaque
+            pierres. Heureusement j'ai mon briquet BIC dans la poche. Ce que révèle la flamme m'effroi. Des dizaines..
+            Non, des centaines photos retouchées sont accrochés sur les murs. Flore à la direction d'Apple. Jimmy sur
+            celle de Squeezie. Tony à une merguez party. Mon Dieu, quel horreur... Mon coeur se soulève devant tant
+            d'attrocité.
+            C'est décidé, je dois mettre un terme à tout ça.
+            Lentement mais sûrement, je photographie chacune des pièces à conviction. J'ai tout ce qu'il me faut pour
+            coffrer ce salopard.
+
+            Je repars aussi discrètement que je suis venu. Personne ne saura que je suis venu. Mais le monde connaîtra
+            sous peu l'identité du Photoshoppeur Fou.
+        </p>
+        <p>
+            18h45.
+            Arrivé au poste de police, je me précipite sur l'ordinateur mis à disposition pour les détectives
+            professionnels tel que moi. Ca rame.
+            Une demi-heure plus tard, Internet Explorer s'ouvre enfin. Vite, il ne faut pas traîner !
+            J'entre en vitesse l'adresse pour enfin conclure cette affaire : http://cluedo.oclock.lan/
+        </p>
+        <p>
+            19h20.
+            La page s'ouvre. Coupable démasqué ? me demande la machine.
+            Bien évidemment.
+            J'entre le nom du coupable sans une certaine délectation.
+            Gédéon Groidenmabaignoire.
+
+            La victoire que je ressens à cet instant est indescriptible. Encore une affaire réussie par le formidable
+            Ray Ponce !
+        </p>
+
+    </div>
+</div>
+
 
 <%- include('partials/footer') %>
