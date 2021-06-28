@@ -5,6 +5,7 @@ const mainController = require('./controllers/mainController');
 const notimeController = require('./controllers/notimeController');
 const photoController = require('./controllers/photoController');
 const phpController = require ('./controllers/phpController');
+const testController = require('./controllers/testController');
 
 const router = express.Router();
 
@@ -14,6 +15,7 @@ router.get('/photoshoppeur',photoController.getPhotoshoppeur);
 router.get('/contact', contactController.getContact);
 router.get('/notime', notimeController.getNoTime);
 router.get('/php', phpController.getPhp);
+router.get('/test', testController.getTest);
 
 
 module.exports = router;

@@ -43,13 +43,16 @@ body {
     list-style: none;
 }
 
-.button {
+.button__logo{
+    color: #ff5e00;
+}
+
+.button button--menu {
     text-decoration: none;
     color: #ff7818;
 }
 
 .footer {
-    padding: 10px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -64,6 +67,11 @@ body {
 .footer a {
     text-decoration: none;
     color: white;
+}
+
+.p__footer{
+padding: 0em;
+margin: 0.3em;
 }
 
 /* HOME */
@@ -115,12 +123,27 @@ a {
     text-decoration: none;
 }
 
-a:visited {
-    color : rgb(204, 135, 45)
-}
 
 a:hover {
     color : rgb(199, 95, 95)
+}
+
+.all_affaires{
+    display: flex;
+    justify-content: space-between;
+    margin: 4em;
+}
+
+.mug_case, .massacre_case, .climatic_case, .photoshop_case, .jaws_case{
+    display: block;
+    width: 300px;
+    border: black solid 2px;
+    transition:transform 0.25s ease;
+}
+
+.mug_case:hover, .massacre_case:hover, .climatic_case:hover, .photoshop_case:hover, .jaws_case:hover{
+-webkit-transform:scale(1.3);
+transform:scale(1.3);
 }
 
 
@@ -286,4 +309,22 @@ p{
     text-align: center;
     line-height: 150%;
     margin: 0em 0em 0.5em;
+    color: whitesmoke;
+}
+
+.a_contact{
+    color: orangered;
+}
+
+/* 404 */
+
+.p__404{
+    text-align: center;
+    color: whitesmoke;
+}
+
+.gif_404{
+    display: flex;
+    margin: auto;
+    text-align: center;
 }
